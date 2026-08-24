@@ -1,0 +1,12 @@
+{
+  "name": "Swap Solana",
+  "short_name": "Swap Solana",
+  "description": "Trade SOL, USDC and SPL tokens on the Solana network through a DEX aggregator.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "en",
+  "background_color": "#0a0e14",
+  "theme_color": "#0a0e14",
+  "icons": [{ "src": "sol.png", "sizes": "any", "type": "image/png", "purpose": "any" }]
+}

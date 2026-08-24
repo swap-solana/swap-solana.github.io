@@ -1,0 +1,25 @@
+# Swap Solana — Swap Tokens on Solana Reference
+
+> Trade SOL, USDC and SPL tokens on the Solana network through a non-custodial DEX aggregator. Fees paid in SOL. Independent, not affiliated with Solana.
+
+## Key Facts
+- Solana: high-throughput layer-1; not EVM — uses Solana wallets like Phantom / Solflare
+- Tradable assets are SPL tokens (Solana's token standard, comparable to ERC-20)
+- Swaps route through on-chain DEXs, often via a DEX aggregator across liquidity pools
+- Fees: network fee in SOL (low) + optional priority fee + DEX pool fee + price impact
+- A new SPL token account can require a small one-time SOL rent deposit
+- Custody: non-custodial — wallet signs; settlement through on-chain programs
+- Independent resource — NOT affiliated with or endorsed by Solana
+
+## Internal Sections & App Navigation
+- [What is Swap Solana?](#what)
+- [How swapping works](#how)
+- [Solana network & wallets](#network)
+- [SPL tokens & pairs](#tokens)
+- [Fees, gas & price impact](#fees)
+- [Is it safe?](#safety)
+- [FAQ](#faq)
+- [Open Swap Solana App](dashboard/index.html)
+
+## Disclaimer
+Independent page. Not affiliated with or endorsed by Solana or any DEX. Not financial advice.

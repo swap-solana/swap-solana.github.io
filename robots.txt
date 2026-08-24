@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://swap-solana.github.io/sitemap.xml
