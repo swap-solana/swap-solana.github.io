@@ -26,8 +26,8 @@
     document.querySelectorAll('[data-intermediate]').forEach(el => { el.textContent = intermediate; });
     document.getElementById('pair-status').textContent = input + ' to ' + output + ' routes';
     document.getElementById('pair-continue').textContent = 'Swap ' + input + ' to ' + output + ' ↗';
-    document.querySelectorAll('.cf6d6e1').forEach(el => {
-      el.classList.toggle('c413cc3', el.dataset.from === input && el.dataset.to === output);
+    document.querySelectorAll('.cca671b').forEach(el => {
+      el.classList.toggle('c9e365d', el.dataset.from === input && el.dataset.to === output);
     });
     if (input === 'SOL') {
       factTitle.textContent = 'Keep SOL for network fees';
