@@ -1,109 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Solana Swap — Swap SOL, USDC, USDT and SPL Tokens</title>
+<meta name="description" content="Solana Swap lets you swap SOL, USDC, USDT and SPL tokens on Solana. Connect Phantom, Solflare or another wallet, review the quote and sign — non-custodial.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#f6f5f4">
+<link rel="canonical" href="https://swap-solana.github.io/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Solana Swap"><meta property="og:title" content="Solana Swap — Swap SOL, USDC, USDT and SPL Tokens"><meta property="og:description" content="Solana Swap lets you swap SOL, USDC, USDT and SPL tokens on Solana. Connect Phantom, Solflare or another wallet, review the quote and sign — non-custodial."><meta property="og:url" content="https://swap-solana.github.io/"><meta property="og:image" content="https://swap-solana.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Solana Swap — Swap SOL, USDC, USDT and SPL Tokens"><meta name="twitter:description" content="Solana Swap lets you swap SOL, USDC, USDT and SPL tokens on Solana. Connect Phantom, Solflare or another wallet, review the quote and sign — non-custodial."><meta name="twitter:image" content="https://swap-solana.github.io/og-image.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://swap-solana.github.io/#organization","name":"Solana Swap","url":"https://swap-solana.github.io/","description":"Solana Swap lets you swap SOL, USDC, USDT and SPL tokens on Solana. Connect Phantom, Solflare or another wallet, review the quote and sign — non-custodial.","logo":{"@type":"ImageObject","@id":"https://swap-solana.github.io/#logo","url":"https://swap-solana.github.io/icon.svg","caption":"Solana Swap"}},{"@type":"WebSite","@id":"https://swap-solana.github.io/#website","url":"https://swap-solana.github.io/","publisher":{"@id":"https://swap-solana.github.io/#organization"},"name":"Solana Swap"},{"@type":"WebPage","@id":"https://swap-solana.github.io/#webpage","url":"https://swap-solana.github.io/","publisher":{"@id":"https://swap-solana.github.io/#organization"},"name":"Solana Swap — Swap SOL, USDC, USDT and SPL Tokens","isPartOf":{"@id":"https://swap-solana.github.io/#website"},"mainEntity":{"@id":"https://swap-solana.github.io/#app"},"breadcrumb":{"@id":"https://swap-solana.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://swap-solana.github.io/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swap-solana.github.io/"},{"@type":"ListItem","position":2,"name":"Solana Swap","item":"https://swap-solana.github.io/"}]},{"@type":"WebApplication","@id":"https://swap-solana.github.io/#app","url":"https://swap-solana.github.io/","publisher":{"@id":"https://swap-solana.github.io/#organization"},"name":"Solana Swap","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"Solana Swap lets you swap SOL, USDC, USDT and SPL tokens on Solana. Connect Phantom, Solflare or another wallet, review the quote and sign — non-custodial.","isPartOf":{"@id":"https://swap-solana.github.io/#website"}},{"@type":"FAQPage","@id":"https://swap-solana.github.io/#faq","isPartOf":{"@id":"https://swap-solana.github.io/#webpage"},"about":{"@id":"https://swap-solana.github.io/#app"},"name":"Solana Swap FAQ","mainEntity":[{"@type":"Question","name":"What can I do with Solana Swap?","acceptedAnswer":{"@type":"Answer","text":"You can swap SOL, USDC, USDT and other SPL tokens on Solana from your own wallet. The interface routes across Solana DEX pools, shows a quote, and you sign the transaction yourself."}},{"@type":"Question","name":"Which wallets work with Solana swaps?","acceptedAnswer":{"@type":"Answer","text":"Any Solana wallet that can connect to a web app, such as Phantom or Solflare. The wallet holds your keys and asks you to approve each transaction."}},{"@type":"Question","name":"Do I need SOL to swap USDC or USDT?","acceptedAnswer":{"@type":"Answer","text":"Yes. Transaction fees on Solana are paid in SOL, even when the token you are selling is a stablecoin. Keep a small SOL balance so you can sign the swap."}},{"@type":"Question","name":"Why did my wallet ask for a small SOL deposit?","acceptedAnswer":{"@type":"Answer","text":"A token you have not held before needs its own token account, and creating it takes a small rent deposit in SOL. The deposit can be recovered if you close the account later."}},{"@type":"Question","name":"Why would a Solana swap fail?","acceptedAnswer":{"@type":"Answer","text":"The price may have moved past your slippage tolerance, the quote may have gone stale before you signed, or the network may have been congested. A failed transaction can still cost the network fee, so review the quote and retry with a fresh one."}},{"@type":"Question","name":"Does the site hold my tokens during a swap?","acceptedAnswer":{"@type":"Answer","text":"No. The swap runs from your wallet through on-chain programs, and the interface never holds your funds or private keys. You can reject any request in your wallet."}}]}]}
+</script>
+<style>
+@font-face{font-family:'Inter';src:url('assets/inter.woff2') format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('assets/space-grotesk.woff2') format('woff2');font-weight:500 700;font-display:swap}
+:root{
+ --bg:#f6f5f4;--card:#fff;--ink:#17181c;--muted:#737b88;--faint:#aeb4bf;
+ --line:#ecebe9;--line-2:#e3e1de;--panel:#f8f7f6;--panel-2:#efedeb;
+ --accent:#9945ff;--accent-hover:#873de0;--accent-ink:#7334bf;--accent-soft:#f1e5ff;--accent-on:#ffffff;--promo:#f5ecff;--text-2:#4b5563;
+ --shadow:0 1px 2px rgba(13,17,28,.04),0 24px 56px -40px rgba(13,17,28,.24);--pico-bg:#fff;--pico-ring:rgba(13,17,28,.06);
+ --ease:cubic-bezier(.2,.7,.2,1);
+ --head:"Space Grotesk","Arial",sans-serif;--body:"Inter","Arial",sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;color:var(--ink);font:15px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:none;-webkit-mask-image:linear-gradient(#000 0,rgba(0,0,0,.35) 60%,transparent 100%);mask-image:linear-gradient(#000 0,rgba(0,0,0,.35) 60%,transparent 100%)}
+a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{margin:0;font-family:var(--head);font-weight:500;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Swap Solana | Choose Your Pair. Compare Your Route.</title>
-<meta content="Swap Solana tokens with a choice of SOL, USDC and USDT pairs. Explore swap routes, understand fees and slippage, and choose your next exchange." name="description"/>
-<meta content="index,follow,max-image-preview:large" name="robots"/>
-<link href="https://swap-solana.github.io/" rel="canonical"/>
-<meta content="website" property="og:type"/>
-<meta content="Swap Solana" property="og:site_name"/>
-<meta content="Swap Solana | Choose Your Pair. Compare Your Route." property="og:title"/>
-<meta content="Swap Solana tokens with a choice of SOL, USDC and USDT pairs. Explore swap routes, understand fees and slippage, and choose your next exchange." property="og:description"/>
-<meta content="https://swap-solana.github.io/" property="og:url"/>
-<meta content="https://swap-solana.github.io/og.png" property="og:image"/>
-<meta content="1200" property="og:image:width"/>
-<meta content="630" property="og:image:height"/>
-<meta content="Swap Solana token pair grid for SOL, USDC and USDT" property="og:image:alt"/>
-<meta content="en_US" property="og:locale"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="Swap Solana | Choose Your Pair. Compare Your Route." name="twitter:title"/>
-<meta content="Swap Solana tokens with a choice of SOL, USDC and USDT pairs. Explore swap routes, understand fees and slippage, and choose your next exchange." name="twitter:description"/>
-<meta content="https://swap-solana.github.io/og.png" name="twitter:image"/>
-<meta content="#101014" name="theme-color"/>
-<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
-<meta content="Swap Solana token pair grid for SOL, USDC and USDT" name="twitter:image:alt"/><meta content="https://swap-solana.github.io/" name="twitter:url"/><link href="assets/site.css" rel="stylesheet"/><script defer="" src="assets/site.js"></script><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-solana.github.io/#website", "url": "https://swap-solana.github.io/", "name": "Swap Solana", "inLanguage": "en"}, {"@type": "WebPage", "@id": "https://swap-solana.github.io/#webpage", "url": "https://swap-solana.github.io/", "name": "Swap Solana | Choose Your Pair. Compare Your Route.", "description": "Swap Solana tokens with a choice of SOL, USDC and USDT pairs. Explore swap routes, understand fees and slippage, and choose your next exchange.", "isPartOf": {"@id": "https://swap-solana.github.io/#website"}, "about": {"@id": "https://swap-solana.github.io/#app"}, "breadcrumb": {"@id": "https://swap-solana.github.io/#breadcrumb"}, "mainEntity": {"@id": "https://swap-solana.github.io/#faq"}, "primaryImageOfPage": {"@type": "ImageObject", "url": "https://swap-solana.github.io/og.png", "width": 1200, "height": 630}, "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09"}, {"@type": "SoftwareApplication", "@id": "https://swap-solana.github.io/#app", "url": "https://swap-solana.github.io/dashboard/", "name": "Swap Solana", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "description": "Select Solana token pairs and compare direct, intermediate-token and split-route structures.", "featureList": ["SOL, USDC and USDT pair selection", "Reversible swap direction", "Token route comparison", "Fee and slippage explanations"], "image": "https://swap-solana.github.io/og.png"}, {"@type": "BreadcrumbList", "@id": "https://swap-solana.github.io/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-solana.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Token swaps", "item": "https://swap-solana.github.io/dashboard/"}, {"@type": "ListItem", "position": 3, "name": "Swap Solana"}]}, {"@type": "FAQPage", "@id": "https://swap-solana.github.io/#faq", "isPartOf": {"@id": "https://swap-solana.github.io/#webpage"}, "mainEntity": [{"@type": "Question", "name": "How do I swap Solana tokens?", "acceptedAnswer": {"@type": "Answer", "text": "Choose the token you pay with and the token you want to receive, then open the swap app. Connect a Solana wallet, enter an amount, review the output and fees, and approve the transaction in your wallet. Keep SOL available for network fees."}}, {"@type": "Question", "name": "What is the difference between SOL and Solana tokens?", "acceptedAnswer": {"@type": "Answer", "text": "Solana is the blockchain. SOL is its native asset, used to pay transaction fees and secure the network through staking. USDC and USDT on Solana are tokens issued on that same network. A SOL-to-USDC swap changes the asset while keeping the funds on Solana."}}, {"@type": "Question", "name": "How much does a Solana swap cost?", "acceptedAnswer": {"@type": "Answer", "text": "The network base fee is 0.000005 SOL per signature, plus any priority fee. Liquidity pools charge trading fees, and a route may include a platform fee. Creating a token account also requires a rent deposit. Review the full cost and net output before approval."}}, {"@type": "Question", "name": "How long does a Solana token swap take?", "acceptedAnswer": {"@type": "Answer", "text": "A swap moves from submission to processing, confirmation, and finalization. Network congestion, the priority fee, and transaction complexity affect the time. Check the transaction status before submitting the same exchange again."}}, {"@type": "Question", "name": "What slippage should I use for a Solana swap?", "acceptedAnswer": {"@type": "Answer", "text": "Set slippage according to the pair, amount, and liquidity. A lower tolerance gives a tighter minimum output but can cause a transaction to fail if prices move. A higher tolerance accepts a wider change in execution price. Review minimum received separately from price impact."}}, {"@type": "Question", "name": "Can I swap USDC for USDT on Solana?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Select USDC as the input and USDT as the output, with both tokens on Solana. Compare a direct pool with a route through SOL. Stablecoin prices and pool fees affect the amount received, so compare the final output rather than assuming a 1:1 conversion."}}, {"@type": "Question", "name": "Can I swap ETH on Solana?", "acceptedAnswer": {"@type": "Answer", "text": "ETH on Solana is a token representation with a specific mint and bridge origin. Match both before trading it. Native ETH on Ethereum first requires a cross-chain transfer into a supported Solana token; a same-chain swap exchanges assets already on Solana."}}, {"@type": "Question", "name": "Why did my Solana swap fail?", "acceptedAnswer": {"@type": "Answer", "text": "Common causes include insufficient SOL for fees, an expired transaction, a price move beyond the slippage limit, or a change in pool liquidity. Check the wallet balance and transaction status, refresh the quote, and review the route before retrying. A processed failed transaction can still incur a network fee."}}]}]}</script></head>
+.nav{display:flex;align-items:center;gap:24px;padding:16px 24px;max-width:1280px;margin:0 auto;width:100%}
+.brand{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:500;font-size:20px;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;flex:0 0 auto}
+.brand img{width:28px;height:28px}
+.nlinks{display:flex;align-items:center;gap:20px}
+.nlinks a{font-size:14px;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .16s var(--ease)}
+.nlinks a:hover{color:var(--ink)}
+.spacer{flex:1}
+main{flex:1}
+.chain{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;background:var(--panel-2);font-weight:500;font-size:14px;color:var(--ink);transition:background-color .16s var(--ease);flex:0 0 auto;white-space:nowrap}
+.chain img{width:20px;height:20px;border-radius:50%}
+.chain:hover{background:var(--line-2)}
+.chain .cv{width:12px;height:12px;color:var(--muted)}
+.connect{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:10px;background:var(--card);border:1px solid var(--line-2);color:var(--ink);font-weight:500;font-size:14px;transition:background-color .16s var(--ease),border-color .16s var(--ease);flex:0 0 auto;white-space:nowrap}
+.connect:hover{border-color:var(--faint);background:var(--panel)}
+
+.hero{display:flex;flex-direction:column;align-items:center;padding:32px 20px 48px}
+h1{font-size:clamp(36px,4.6vw,48px);line-height:1.08;letter-spacing:-.025em;text-align:center;color:var(--ink);margin:0 0 32px}
+
+.card{width:min(600px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+.tabs{display:flex;align-items:center;gap:4px;padding:20px 20px 16px}
+.tab{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.tab:hover{background:var(--panel-2);color:var(--ink)}
+.tab.on{background:var(--accent-soft);color:var(--accent-ink)}
+.tabs .sp{flex:1}
+.tabs .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.tabs .ic:hover{background:var(--panel-2);color:var(--ink)}
+.tabs .ic svg{width:18px;height:18px}
+
+.promo{margin:0 20px;padding:32px;border-radius:12px;background:var(--promo);display:flex;align-items:center;gap:20px}
+.promo-txt{flex:1;min-width:0}
+.promo-h{font-family:var(--head);font-weight:500;font-size:clamp(22px,3.4vw,28px);line-height:1.2;letter-spacing:-.015em;color:var(--ink);margin:0 0 8px;text-wrap:balance}
+.promo-sub{font-size:15px;line-height:1.6;color:var(--text-2);margin:0;max-width:34ch}
+.promo-grid{flex:0 0 auto;display:grid;grid-template-columns:repeat(2,auto);gap:16px}
+.pico{width:52px;height:52px;border-radius:50%;background:var(--pico-bg);box-shadow:0 0 0 1px var(--pico-ring);display:grid;place-items:center;overflow:hidden}
+.pico img{width:100%;height:100%;object-fit:contain;display:block}
+.promo-flow{flex-direction:column;align-items:stretch;gap:24px}
+.promo-flow .promo-sub{max-width:44ch}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.flow li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.flow li+li::before{content:"";position:absolute;top:22px;right:calc(50% + 30px);width:calc(100% - 52px);height:1px;background:var(--line-2)}
+.fi{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:var(--pico-bg);box-shadow:0 0 0 1px var(--pico-ring);color:var(--accent-ink)}
+.fi img{width:100%;height:100%;display:block}
+.fi svg{width:20px;height:20px}
+.fi.on{background:var(--accent);color:var(--accent-on);box-shadow:none}
+.flow b{margin-top:4px;font-weight:500;font-size:14px;color:var(--ink)}
+.flow small{font-size:13px;line-height:1.4;color:var(--muted)}
+.cta-wrap{padding:20px}
+.cta{width:100%;height:60px;border-radius:12px;background:var(--accent);color:var(--accent-on);font-weight:500;font-size:16px;transition:background-color .16s var(--ease),transform .12s var(--ease)}
+.cta:hover{background:var(--accent-hover)}
+.cta:active{transform:scale(.99)}
+@media(max-width:470px){.promo{flex-direction:column;align-items:flex-start}.promo-grid{grid-template-columns:repeat(4,auto)}.promo-sub{max-width:none}}
+
+.learn{max-width:720px;margin:48px auto 0;width:100%;padding:0 24px 72px}
+.learn-h{font-size:14px;font-weight:500;color:var(--muted);text-align:center;margin:0 0 12px}
+.lrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:flex-start}
+.lcard{flex:0 0 auto;background:transparent;border:1px solid var(--line-2);border-radius:10px;transition:background-color .16s var(--ease),border-color .16s var(--ease)}
+.lcard>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;font-weight:500;font-size:14px;color:var(--text-2)}
+.lcard>summary::-webkit-details-marker{display:none}
+.lcard:hover{border-color:var(--faint);background:var(--card)}.lcard:hover>summary{color:var(--ink)}
+.lcard .chev{width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-4px;flex-shrink:0;transition:transform .16s var(--ease)}
+.lcard[open]{order:9;flex:0 0 100%;min-width:0;background:var(--card);border-color:var(--line-2);border-radius:16px;margin-top:8px}
+.lcard[open]>summary{height:auto;padding:20px 24px 0;color:var(--muted);font-size:13px}
+.lcard[open] .chev{transform:rotate(225deg);margin-top:4px}
+.lbody{padding:4px 24px 24px;max-width:660px}
+.lbody h2{font-size:22px;line-height:1.3;color:var(--ink);margin:8px 0 4px}
+.lbody h3{font-size:15px;line-height:1.4;color:var(--ink);margin:20px 0 4px}
+.lbody p{margin:0;font-size:15px;line-height:1.7;color:var(--text-2)}
+.lbody p+p{margin-top:8px}
+.lbody ul,.lbody ol{margin:8px 0 0;padding-left:20px}
+.lbody li{font-size:15px;line-height:1.7;color:var(--text-2);margin-bottom:4px}
+.lbody a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.lbody strong,.lbody b{color:var(--ink);font-weight:500}
+.lbody .tbl{overflow-x:auto;margin:16px 0 4px}
+.lbody table{width:100%;min-width:420px;border-collapse:collapse;font-size:14px}
+.lbody caption{text-align:left;color:var(--muted);font-size:13px;margin-bottom:8px}
+.lbody th,.lbody td{text-align:left;padding:8px 12px;border:1px solid var(--line-2);vertical-align:top;line-height:1.45}
+.lbody thead th{background:var(--panel);color:var(--ink);font-weight:500}
+.lbody tbody th{background:var(--panel);color:var(--muted);white-space:nowrap;font-weight:500}
+.lbody td{color:var(--text-2)}
+.lfaq h3{margin-top:16px;font-size:16px}
+
+footer{border-top:1px solid var(--line-2);background:var(--card)}
+.foot{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:20px 24px 24px;color:var(--muted);font-size:13px}
+.foot a{color:var(--muted);transition:color .16s var(--ease)}.foot a:hover{color:var(--ink)}.foot .sep{color:var(--faint)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:var(--ink);color:var(--bg);border-radius:12px;padding:12px 16px;font-size:13px;box-shadow:0 16px 40px -16px rgba(13,17,28,.5);z-index:60;opacity:0;visibility:hidden;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+@media(max-width:1120px){.nlinks{display:none}}
+@media(max-width:720px){.chain span{display:none}.chain{padding:0 8px;gap:4px}}
+@media(max-width:560px){
+  .nav{padding:12px 16px;gap:8px}
+  .brand{font-size:16px}
+  .brand img{width:24px;height:24px}
+  .chain{height:36px;padding:0 8px;gap:4px}
+  .chain span{display:none}
+  .connect{height:36px;padding:0 12px;font-size:13px}
+  .hero{padding:24px 16px 40px}
+  .tabs{padding:16px 16px 12px}.promo{margin:0 16px;padding:24px}.cta-wrap{padding:16px}.cta{height:56px}
+  .learn{margin-top:40px;padding:0 16px 56px}
+}
+</style>
+<link rel="prerender" href="/dashboard/">
+<link rel="prefetch" href="/dashboard/" as="document">
+<link rel="preload" href="/dashboard/" as="document">
+</head>
 <body>
-<a class="c4b44f5" href="#main">Skip to content</a>
-<header class="c9a0c7c"><div class="cd69630">
-<a aria-label="Open Swap Solana" class="cdb308f" href="dashboard/"><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/><span>Swap Solana</span></a>
-<nav aria-label="Primary"><a href="#pairs">Token pairs</a><a href="#routes">Swap routes</a><a href="#fees">Fees &amp; timing</a><a href="#faq">FAQ</a></nav>
-<a class="c240a95 c69f87d" href="dashboard/">Open app <span aria-hidden="true" class="c940826">↗</span></a>
-</div></header>
-<main id="main">
-<section class="cb61a90"><div class="cd69630">
-<nav aria-label="Breadcrumb" class="cd663d3" style="margin-bottom:24px"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="dashboard/">Token swaps</a> <span aria-hidden="true">/</span> <span aria-current="page">Swap Solana</span></nav>
-<div class="cca994e"><div>
-<h1>Swap <span>Solana</span></h1>
-<p class="c75cf00" style="margin-bottom:16px">To swap Solana tokens, connect a Solana wallet, choose SOL, USDC or USDT as your input and output, enter an amount, and approve the quoted exchange. The swap exchanges assets on the Solana network. Keep SOL available to pay network fees and review the minimum received before signing.</p>
-<p class="c75cf00"><strong>Swap Solana</strong> tokens by choosing a pair, comparing routes, and confirming your exchange in a Solana wallet. Move between SOL, USDC and USDT on the same network.</p>
-<p class="cd663d3" style="margin-top:12px">Updated <time datetime="2026-10-09">Oct 09, 2026</time></p>
-</div><div class="c9f4f1d"><a class="c240a95" href="dashboard/">Start swapping <span aria-hidden="true" class="c940826">↗</span></a><p>Review the route before signing</p></div></div>
-<div class="c5f7e52" id="pairs"><h2>Choose your Solana swap pair</h2><span class="c18153f"><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/>Solana network</span></div>
-<nav aria-label="Solana token pairs" class="c7cb0ac"><a aria-label="Swap SOL to USDC on Solana" class="cca671b c9e365d" data-from="SOL" data-to="USDC" href="dashboard/"><span class="ccd4efb"><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/><span aria-hidden="true" class="cf1279e">→</span><img alt="" height="28" src="assets/tokens/usdc.svg" width="28"/></span><span aria-hidden="true" class="c502de1">↗</span><span class="ccc0d39"><b>SOL <span aria-hidden="true">/</span> USDC</b><small>SOL to stablecoin</small></span></a><a aria-label="Swap USDC to SOL on Solana" class="cca671b" data-from="USDC" data-to="SOL" href="dashboard/"><span class="ccd4efb"><img alt="" height="28" src="assets/tokens/usdc.svg" width="28"/><span aria-hidden="true" class="cf1279e">→</span><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/></span><span aria-hidden="true" class="c502de1">↗</span><span class="ccc0d39"><b>USDC <span aria-hidden="true">/</span> SOL</b><small>Stablecoin to SOL</small></span></a><a aria-label="Swap SOL to USDT on Solana" class="cca671b" data-from="SOL" data-to="USDT" href="dashboard/"><span class="ccd4efb"><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/><span aria-hidden="true" class="cf1279e">→</span><img alt="" height="28" src="assets/tokens/usdt.svg" width="28"/></span><span aria-hidden="true" class="c502de1">↗</span><span class="ccc0d39"><b>SOL <span aria-hidden="true">/</span> USDT</b><small>SOL to stablecoin</small></span></a><a aria-label="Swap USDT to SOL on Solana" class="cca671b" data-from="USDT" data-to="SOL" href="dashboard/"><span class="ccd4efb"><img alt="" height="28" src="assets/tokens/usdt.svg" width="28"/><span aria-hidden="true" class="cf1279e">→</span><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/></span><span aria-hidden="true" class="c502de1">↗</span><span class="ccc0d39"><b>USDT <span aria-hidden="true">/</span> SOL</b><small>Stablecoin to SOL</small></span></a><a aria-label="Swap USDC to USDT on Solana" class="cca671b" data-from="USDC" data-to="USDT" href="dashboard/"><span class="ccd4efb"><img alt="" height="28" src="assets/tokens/usdc.svg" width="28"/><span aria-hidden="true" class="cf1279e">→</span><img alt="" height="28" src="assets/tokens/usdt.svg" width="28"/></span><span aria-hidden="true" class="c502de1">↗</span><span class="ccc0d39"><b>USDC <span aria-hidden="true">/</span> USDT</b><small>Stablecoin exchange</small></span></a><a aria-label="Swap USDT to USDC on Solana" class="cca671b" data-from="USDT" data-to="USDC" href="dashboard/"><span class="ccd4efb"><img alt="" height="28" src="assets/tokens/usdt.svg" width="28"/><span aria-hidden="true" class="cf1279e">→</span><img alt="" height="28" src="assets/tokens/usdc.svg" width="28"/></span><span aria-hidden="true" class="c502de1">↗</span><span class="ccc0d39"><b>USDT <span aria-hidden="true">/</span> USDC</b><small>Stablecoin exchange</small></span></a></nav>
-<div class="cb3c9bf"><span>3 tokens · 6 swap directions · One network</span><a href="#routes">Explore route options <span aria-hidden="true">↓</span></a></div>
-</div></section>
-<section class="c1ef344" id="swap-facts" aria-labelledby="swap-facts-title" style="padding-block:32px"><div class="cd69630">
-<div class="c5f7e52"><h2 id="swap-facts-title">Swap Solana key facts</h2></div>
-<table class="cb698f6"><caption class="c4b44f5">Network, token pairs and requirements for a Solana swap</caption><thead><tr><th scope="col">Parameter</th><th scope="col">Details</th></tr></thead><tbody>
-<tr><td>Network</td><td>Solana mainnet; input and output assets stay on the same blockchain.</td></tr>
-<tr><td>Token pairs</td><td>SOL, USDC and USDT on Solana: 3 tokens and 6 swap directions.</td></tr>
-<tr><td>Base network fee</td><td>5,000 lamports (0.000005 SOL) per signature, plus any priority fee. See <a href="https://solana.com/docs/core/fees" rel="nofollow noopener" target="_blank" style="text-decoration:underline">Solana transaction fees</a>.</td></tr>
-<tr><td>Additional costs</td><td>Pool fees apply per hop; platform fees depend on the route. A new token account requires a refundable SOL rent deposit.</td></tr>
-<tr><td>Wallet requirements</td><td>A Solana wallet holding the input asset and SOL for fees. Receiving a different token requires its own token account; see <a href="https://solana.com/docs/tokens" rel="nofollow noopener" target="_blank" style="text-decoration:underline">Solana token documentation</a>.</td></tr>
-<tr><td>Swap authorization</td><td>You sign the swap transaction in your Solana wallet; the output is delivered to your wallet's receiving account.</td></tr>
-</tbody></table>
-</div></section>
-<section class="c1ef344" id="routes"><div class="cd69630 cb1aa1b">
-<div class="c3951f5"><h2>Find a route for your Solana swap</h2><p>Choose the tokens you want to exchange. Compare how a direct pool, an intermediate token, or a split across pools connects your pair.</p><div class="ccccd89"><b id="pair-fact-title">Keep SOL for network fees</b><span id="pair-fact">When selling SOL for USDC, leave a SOL balance for transaction fees and any new token account.</span></div></div>
-<div class="cb9138f">
-<div class="c21b5ce"><div class="c61735e"><label for="from-token">You pay</label><div class="c09f850"><img alt="" height="28" id="from-icon" src="assets/tokens/sol.svg" width="28"/><select aria-controls="route-results" id="from-token"><option selected="" value="SOL">SOL</option><option value="USDC">USDC</option><option value="USDT">USDT</option></select></div></div><button aria-label="Reverse token pair" class="cd3916f" id="reverse-pair" type="button">⇄</button><div class="c61735e"><label for="to-token">You receive</label><div class="c09f850"><img alt="" height="28" id="to-icon" src="assets/tokens/usdc.svg" width="28"/><select aria-controls="route-results" id="to-token"><option value="SOL">SOL</option><option selected="" value="USDC">USDC</option><option value="USDT">USDT</option></select></div></div></div>
-<div aria-atomic="true" aria-live="polite" id="route-results">
-<div class="c4347da"><b id="pair-status">SOL to USDC routes</b><span>3 routing structures</span></div>
-<ul class="ca83f65">
-<li class="c372f8c"><h3><b data-input="">SOL</b><span aria-hidden="true">→</span><b data-output="">USDC</b></h3><p>A single pool exchanges your input directly into the output token.</p><span class="cc3bf82">Direct</span></li>
-<li class="c372f8c"><h3><b data-input="">SOL</b><span aria-hidden="true">→</span><b data-intermediate="">USDT</b><span aria-hidden="true">→</span><b data-output="">USDC</b></h3><p>Two pool swaps use an intermediate token to connect the pair.</p><span class="cc3bf82">2 hops</span></li>
-<li class="c372f8c"><h3><b data-input="">SOL</b><span aria-hidden="true">→</span><span>multiple pools</span><span aria-hidden="true">→</span><b data-output="">USDC</b></h3><p>Parts of the order use separate pools to spread the liquidity demand.</p><span class="cc3bf82">Split</span></li>
-</ul>
-</div>
-<div class="c418139"><p>Pool availability, trade size and fees determine the quoted route and final output.</p><a class="c240a95 c27bf57" href="dashboard/" id="pair-continue">Swap SOL to USDC ↗</a></div>
-</div>
-</div></section>
-<section class="c1ef344" id="how"><div class="cd69630">
-<div class="c5b6b5c"><h2>How to swap tokens on Solana</h2><p>A same-chain swap exchanges one asset for another in your Solana wallet. Both the input and the received token stay on Solana.</p></div>
-<ol class="c8d4f36">
-<li><span aria-hidden="true" class="cb790b5">⇄</span><h3>Choose a token pair</h3><p>Select the asset you hold and the asset you want. Use SOL for the network's native token or choose a USDC and USDT stablecoin pair.</p></li>
-<li><span aria-hidden="true" class="cb790b5">≋</span><h3>Review the swap quote</h3><p>Open the app and enter your amount. Compare net output, price impact, minimum received and the full fee breakdown for the route.</p></li>
-<li><span aria-hidden="true" class="cb790b5">✓</span><h3>Approve in your wallet</h3><p>Check the tokens and transaction details, then sign. Follow the confirmation status and check the received token balance in your wallet.</p></li>
-</ol>
-</div></section>
-<section class="c1ef344" id="fees"><div class="cd69630 ce3ebac">
-<div><h2>Solana swap fees<br/>and transaction time</h2><p class="c75cf00">The network fee is one part of the cost. Compare the amount you receive after pool and route fees, and keep SOL available for the transaction.</p><div class="c37956c">0.000005 <span>SOL</span></div><p class="cd663d3">Base network fee per signature, before priority fees.</p></div>
-<div><table class="cb698f6"><caption class="c4b44f5">Solana token swap cost breakdown</caption><thead><tr><th scope="col">Cost component</th><th scope="col">What affects it</th></tr></thead><tbody>
-<tr><td>Network fee</td><td>Base fee per signature plus a priority fee based on the requested compute budget.</td></tr>
-<tr><td>Pool trading fee</td><td>The liquidity pool and its fee tier. Each hop can add a pool fee.</td></tr>
-<tr><td>Platform fee</td><td>The swap service and route. Check the quote's fee breakdown.</td></tr>
-<tr><td>Token account</td><td>A rent deposit when a new token account is created. Account closure can reclaim the deposit.</td></tr>
-</tbody></table><div class="cae2c9a"><h3>Follow confirmation</h3><p>Processing, confirmation and finalization are separate stages. Network demand and transaction priority affect when your swap lands.</p></div></div>
-</div></section>
-<section class="c1ef344" id="safety"><div class="cd69630 cc78c64">
-<div><h2>Swap Solana tokens<br/>with the right checks</h2><p>Review the asset, the network and the minimum output before you approve an exchange.</p><ul class="c7040d9">
-<li><b>Match the token mint</b>Token names and symbols can be copied. Match the mint address to the asset you intend to trade, especially for bridged tokens.</li>
-<li><b>Keep a SOL balance</b>Reserve SOL for fees and account creation. Swapping your entire SOL balance can leave too little for the next transaction.</li>
-<li><b>Read the wallet request</b>Check the expected balance changes and transaction instructions. Keep your recovery phrase private and approve only the intended action.</li>
-</ul></div>
-<aside aria-labelledby="slippage-title" class="c4387fa"><h3 id="slippage-title">What 0.5% slippage means</h3><p>Slippage tolerance sets how far execution can move against a quoted output. It is a price limit, not an extra fee.</p><dl><div><dt>For a quoted output of</dt><dd>100 USDC</dd></div><div><dt>At a slippage tolerance of</dt><dd>0.5%</dd></div><div><dt>Minimum received</dt><dd>99.50 USDC</dd></div></dl><p class="cd2d17c">Minimum output = quoted output × (1 − slippage).<br/>Token precision determines rounding. Price impact is separate: it measures how the order changes the pool's price.</p></aside>
-</div></section>
-<section class="c1ef344" id="faq"><div class="cd69630 cfcd383"><div><h2>Swap Solana<br/>questions, answered</h2><p>Token choices, transaction costs and the details to check before signing.</p></div><div class="ca99064"><details open=""><summary>How do I swap Solana tokens?</summary><p>Choose the token you pay with and the token you want to receive, then open the swap app. Connect a Solana wallet, enter an amount, review the output and fees, and approve the transaction in your wallet. Keep SOL available for network fees.</p></details><details><summary>What is the difference between SOL and Solana tokens?</summary><p>Solana is the blockchain. SOL is its native asset, used to pay transaction fees and secure the network through staking. USDC and USDT on Solana are tokens issued on that same network. A SOL-to-USDC swap changes the asset while keeping the funds on Solana.</p></details><details><summary>How much does a Solana swap cost?</summary><p>The network base fee is 0.000005 SOL per signature, plus any priority fee. Liquidity pools charge trading fees, and a route may include a platform fee. Creating a token account also requires a rent deposit. Review the full cost and net output before approval.</p></details><details><summary>How long does a Solana token swap take?</summary><p>A swap moves from submission to processing, confirmation, and finalization. Network congestion, the priority fee, and transaction complexity affect the time. Check the transaction status before submitting the same exchange again.</p></details><details><summary>What slippage should I use for a Solana swap?</summary><p>Set slippage according to the pair, amount, and liquidity. A lower tolerance gives a tighter minimum output but can cause a transaction to fail if prices move. A higher tolerance accepts a wider change in execution price. Review minimum received separately from price impact.</p></details><details><summary>Can I swap USDC for USDT on Solana?</summary><p>Yes. Select USDC as the input and USDT as the output, with both tokens on Solana. Compare a direct pool with a route through SOL. Stablecoin prices and pool fees affect the amount received, so compare the final output rather than assuming a 1:1 conversion.</p></details><details><summary>Can I swap ETH on Solana?</summary><p>ETH on Solana is a token representation with a specific mint and bridge origin. Match both before trading it. Native ETH on Ethereum first requires a cross-chain transfer into a supported Solana token; a same-chain swap exchanges assets already on Solana.</p></details><details><summary>Why did my Solana swap fail?</summary><p>Common causes include insufficient SOL for fees, an expired transaction, a price move beyond the slippage limit, or a change in pool liquidity. Check the wallet balance and transaction status, refresh the quote, and review the route before retrying. A processed failed transaction can still incur a network fee.</p></details></div></div></section>
-<section class="cc9db3d"><div class="cd69630"><div class="c666a8f"><div><h2>Start with your Solana token pair</h2><p>Choose what you pay. Review what you receive.</p></div><a class="c240a95" href="dashboard/">Open swap app <span aria-hidden="true" class="c940826">↗</span></a></div></div></section>
-</main>
-<footer class="c6c9191"><div class="cd69630 c458734"><a class="cdb308f" href="dashboard/"><img alt="" height="28" src="assets/tokens/sol.svg" width="28"/><span>Swap Solana</span></a><nav aria-label="Footer"><a href="#pairs">Token pairs</a><a href="#how">How it works</a><a href="#safety">Safety</a><a href="#faq">FAQ</a></nav><p class="c70ccd1">© 2026 Swap Solana</p></div></footer>
-</body>
-</html>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 5 5 5-5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="5" ry="2.5"/><path d="M4 7v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V7"/><path d="M10 15.5c.6 1.2 2.6 2 5 2 2.8 0 5-1.1 5-2.5v-4c0-1.4-2.2-2.5-5-2.5"/><path d="M20 15v4c0 1.4-2.2 2.5-5 2.5s-5-1.1-5-2.5v-2"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><path d="M12 14.5v2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s-6 6.4-6 10.5a6 6 0 0 0 12 0c0-4.1-6-10.5-6-10.5z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M8 7.5h.01M8 16.5h.01"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.8 7.8 0 0 0 0-2l2-1.5-2-3.4-2.3 1a7.6 7.6 0 0 0-1.7-1L15 2.5h-4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.3-1-2 3.4L4.6 11a7.8 7.8 0 0 0 0 2l-2 1.5 2 3.4 2.3-1c.5.4 1.1.7 1.7 1l.4 2.6h4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.3 1 2-3.4z"/></symbol>
+</defs></svg>
 
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="Solana Swap home"><img src="icon.svg" alt=""><span>Solana Swap</span></a>
+  <nav class="nlinks" aria-label="Primary">
+    <a href="#overview">Solana basics</a>
+    <a href="#compare">SOL vs SPL</a>
+    <a href="#how">How to swap</a>
+    <a href="#fees">Fees &amp; gas</a>
+    <a href="#security">Security</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <span class="spacer"></span>
+  <a class="chain" href="/dashboard/" style="text-decoration:none"><img src="assets/coin-sol.svg" alt=""><span>Solana</span><svg class="cv" aria-hidden="true"><use href="#i-cv"/></svg></a>
+  <a class="connect" href="/dashboard/" style="text-decoration:none">Connect wallet</a>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Solana Swap</h1>
+
+    <section class="card" aria-label="Solana Swap">
+      <div class="tabs">
+        <button class="tab on" type="button">Swap</button>
+        <button class="tab" type="button">Status</button>
+        <span class="sp"></span>
+        <button class="ic gear" type="button" aria-label="Settings" data-toast="Settings are disabled in this demo."><svg aria-hidden="true"><use href="#i-gear"/></svg></button>
+      </div>
+
+      <div class="promo">
+        <div class="promo-txt">
+          <h2 class="promo-h">Swap SOL, USDC, USDT and SPL tokens</h2>
+          <p class="promo-sub">Trade on Solana from your own wallet. Fees are paid in SOL and you sign every transaction.</p>
+        </div>
+        <div class="promo-grid" aria-hidden="true">
+          <span class="pico"><img src="assets/coin-sol.svg" alt=""></span>
+          <span class="pico"><img src="assets/tether-usdt.svg" alt=""></span>
+          <span class="pico"><img src="assets/usd-coin-usdc.svg" alt=""></span>
+          <span class="pico"><img src="assets/ethereum-eth.svg" alt=""></span>
+        </div>
+      </div>
+
+      <div class="cta-wrap"><a class="cta" href="/dashboard/" style="display:flex;align-items:center;justify-content:center;text-decoration:none">Swap SOL</a></div>
+    </section>
+  </section>
+
+  <section class="learn" id="learn">
+    <p class="learn-h">Learn about Solana Swap</p>
+    <div class="lrow">
+      <details class="lcard" name="learn" id="overview"><summary><span>Solana basics</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>How Solana Swap works</h2>
+<h3>Trading SOL and SPL tokens from your wallet</h3>
+<p><strong>Solana Swap</strong> is a non-custodial interface for exchanging SOL, USDC, USDT and other SPL tokens on Solana. You connect a wallet such as Phantom or Solflare, choose the two assets and review a quote before you sign.</p>
+<h3>SOL and SPL tokens</h3>
+<p>SOL is the native coin of Solana and pays for transaction fees. Every other asset is an SPL token, the network's token standard. Each SPL token you hold sits in its own token account, and routers use a wrapped form of SOL when a pool needs it, which the interface handles for you.</p></div></details>
+
+      <details class="lcard" name="learn" id="compare"><summary><span>SOL vs SPL</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>Swapping SOL or an SPL token</h2>
+<p>Solana has no separate approval step, but a new token needs a place to land in your wallet.</p>
+<div class="tbl"><table><caption>Swap from SOL vs swap from an SPL token</caption><thead><tr><th scope="col"></th><th scope="col">From SOL</th><th scope="col">From an SPL token</th></tr></thead><tbody><tr><th scope="row">Asset type</th><td>native coin</td><td>SPL token</td></tr><tr><th scope="row">Approval</th><td>not needed</td><td>not needed, you sign the swap</td></tr><tr><th scope="row">Fees paid in</th><td>SOL</td><td>SOL</td></tr><tr><th scope="row">New token</th><td>may need a token account</td><td>may need a token account for the buy token</td></tr></tbody></table></div>
+<h3>In practice</h3>
+<p>If you receive a token for the first time, a token account is created for it in the same transaction. That takes a small refundable rent deposit in SOL, shown in the wallet prompt.</p></div></details>
+
+      <details class="lcard" name="learn" id="how"><summary><span>How to swap</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>How to swap on Solana</h2>
+<h3>Route and quote</h3>
+<p>The interface searches Solana DEX pools, can split a trade across several of them, and shows the expected output, price impact and slippage tolerance. You confirm the quote before the wallet is asked to sign.</p>
+<h3>Step by step</h3>
+<ol>
+<li>Connect your Solana wallet, such as Phantom or Solflare.</li>
+<li>Choose the sell token and the buy token, then enter an amount.</li>
+<li>Review the quote, route and network fee.</li>
+<li>Sign the swap in your wallet; it is sent to the network and confirms on-chain.</li>
+<li>Check your wallet for the bought token once the transaction is final.</li>
+</ol>
+<p>If you wait too long to sign, the quote can go stale, and a refreshed one will be shown.</p></div></details>
+
+      <details class="lcard" name="learn" id="fees"><summary><span>Fees &amp; gas</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>What a Solana swap costs</h2>
+<h3>Network fees</h3>
+<p>Fees on Solana are paid in SOL and are usually small compared with many other chains. Some wallets add an optional priority fee when the network is busy. See the <a href="https://solana.com/docs" target="_blank" rel="nofollow noopener">Solana docs</a> for how fees work.</p>
+<h3>Trading cost</h3>
+<p>A swap also carries price impact, your slippage tolerance and any pool or aggregator fee, all reflected in the quoted output. A failed transaction can still cost the network fee.</p>
+<h3>Keep SOL in the wallet</h3>
+<p>Holding USDC or USDT does not pay for fees. Keep a little SOL for the swap itself and for any token account deposits, or the wallet will not let you sign.</p></div></details>
+
+      <details class="lcard" name="learn" id="security"><summary><span>Security</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>Staying safe</h2>
+<h3>Non-custodial by design</h3>
+<p>You connect your own wallet and sign every transaction yourself. A swap interface routes and quotes; it never holds your funds or keys.</p>
+<h3>Before you sign</h3>
+<ul>
+<li>Verify the token mint address; fake tokens with copied names and logos are common on Solana.</li>
+<li>Read what your wallet says the transaction will do, including any token accounts it creates.</li>
+<li>Check the quote, price impact and slippage before confirming.</li>
+<li>Never share your seed phrase; a swap does not need it.</li>
+<li>Smart contracts can hold bugs, so risk is never zero.</li>
+</ul></div></details>
+
+      <details class="lcard" name="learn" id="faq"><summary><span>FAQ</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody lfaq"><h2>Solana Swap FAQ</h2>
+<h3>What can I do with Solana Swap?</h3>
+<p>You can swap SOL, USDC, USDT and other SPL tokens on Solana from your own wallet. The interface routes across Solana DEX pools, shows a quote, and you sign the transaction yourself.</p>
+<h3>Which wallets work with Solana swaps?</h3>
+<p>Any Solana wallet that can connect to a web app, such as Phantom or Solflare. The wallet holds your keys and asks you to approve each transaction.</p>
+<h3>Do I need SOL to swap USDC or USDT?</h3>
+<p>Yes. Transaction fees on Solana are paid in SOL, even when the token you are selling is a stablecoin. Keep a small SOL balance so you can sign the swap.</p>
+<h3>Why did my wallet ask for a small SOL deposit?</h3>
+<p>A token you have not held before needs its own token account, and creating it takes a small rent deposit in SOL. The deposit can be recovered if you close the account later.</p>
+<h3>Why would a Solana swap fail?</h3>
+<p>The price may have moved past your slippage tolerance, the quote may have gone stale before you signed, or the network may have been congested. A failed transaction can still cost the network fee, so review the quote and retry with a fresh one.</p>
+<h3>Does the site hold my tokens during a swap?</h3>
+<p>No. The swap runs from your wallet through on-chain programs, and the interface never holds your funds or private keys. You can reject any request in your wallet.</p></div></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot"><span>&copy; 2026 Solana Swap</span><span class="sep">&middot;</span><a href="legal.html#privacy">Privacy</a><span class="sep">&middot;</span><a href="legal.html#terms">Terms</a><span class="sep">&middot;</span><span>Non-custodial &middot; Solana</span></div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var tabs=[].slice.call(document.querySelectorAll('.tab'));
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.toggle('on',x===t);});});});
+
+var toast=document.getElementById('toast'),tT;
+function notify(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tT);tT=setTimeout(function(){toast.classList.remove('show');},3000);}
+[].slice.call(document.querySelectorAll('[data-toast]')).forEach(function(b){b.addEventListener('click',function(){notify(b.getAttribute('data-toast'));});});
+
+function openHash(){var id=location.hash.slice(1);if(!id)return;var c=document.getElementById(id);if(c&&c.matches&&c.matches('.lcard[name="learn"]'))c.open=true;}
+window.addEventListener('hashchange',openHash);openHash();
+[].slice.call(document.querySelectorAll('.nlinks a')).forEach(function(a){a.addEventListener('click',function(){var c=document.getElementById(a.getAttribute('href').slice(1));if(c&&c.matches('.lcard'))c.open=true;});});
+})();
+</script>
+</body></html>
